@@ -8,11 +8,13 @@ const mongo_uri = process.env.DATABASE_URL;
 
 const app = express();
 
+app.use(express.json())
+
 //Middleware
 const postsRouter = require("./routes/posts");
-app.use("posts", postsRouter);
+app.use("/posts", postsRouter);
 
-mongoose.connect(mongo_uri) 
+mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}) 
     .then(() => {
         console.log("Databse connected succesfully");
     })
