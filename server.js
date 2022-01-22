@@ -4,9 +4,13 @@ const dotenv = require("dotenv").config();
 
 const mongoose = require("mongoose");
 
-const mongo_uri = process.env.DATABASE_URL
+const mongo_uri = process.env.DATABASE_URL;
 
 const app = express();
+
+//Middleware
+const postsRouter = require("./routes/posts");
+app.use("posts", postsRouter);
 
 mongoose.connect(mongo_uri) 
     .then(() => {
